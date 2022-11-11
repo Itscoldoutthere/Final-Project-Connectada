@@ -1,8 +1,9 @@
 import {useState} from "react";
 import Message from "./Message";
 
-const NewBudget = ({budget, setBudget}) => {
-    const [message, setMessage] = useState("");
+const NewBudget = ({budget, setBudget, setIsValidBudget}) => {
+
+    const [message, setMessage] = useState('');
 
     const handleBudget = (e) => {
         e.preventDefault();
@@ -13,6 +14,7 @@ const NewBudget = ({budget, setBudget}) => {
         }
 
         setMessage("");
+        setIsValidBudget(true);
     };
 
     return (
@@ -20,9 +22,13 @@ const NewBudget = ({budget, setBudget}) => {
             <form onSubmit={handleBudget}
                 className="formulario">
                 <div className="campo">
-                    <label>Define your budget.</label>
+                    <label>Define your budget</label>
 
-                    <input className="nuevo-presupuesto" type="text" placeholder="Type your budget here."
+                    <input 
+                        className   = "nuevo-presupuesto"
+                        type        = "number"
+                        placeholder = "Type your budget here"
+                        
                         value={budget}
                         onChange={
                             (e) => setBudget(Number(e.target.value))
@@ -32,7 +38,8 @@ const NewBudget = ({budget, setBudget}) => {
                 <input type="submit" value="add budget"/> {
                 message && <Message tipo="error">
                     {message}</Message>
-            } </form>
+            } 
+          </form>
         </div>
     );
 };
